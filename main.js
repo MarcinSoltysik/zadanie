@@ -3,8 +3,8 @@ const url = `https://raw.githubusercontent.com/alexsimkovich/patronage/main/api/
 
 fetch(url)
     .then(response => response.json())
-    //.then(response => {console.log(response);})
-    .then(json => renderPizzaList(json))  //(json.results) dlaczego ja nie mam takiego info w mojej tablicy ??
+    
+    .then(json => renderPizzaList(json))  
     .catch(error => {
         console.error(error);
     });
@@ -14,7 +14,7 @@ fetch(url)
 const renderPizzaList = (pizzaList) => {
     const menuPizzaList = document.querySelector("#list-pizza");
     pizzaList.forEach( pizza => {
-        //console.log(pizza);
+       
         const item = document.createElement('li');
         item.className = 'item__pizza';
         item.innerHTML = `

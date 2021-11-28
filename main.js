@@ -161,8 +161,8 @@ class Basket {
 
 
 
-    remove(no) {
-        this.items.splice(no - 1, 1); 
+    remove(n) {
+        this.items.splice(n - 1, 1); 
     }
 
 

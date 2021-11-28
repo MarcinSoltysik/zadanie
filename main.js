@@ -1,4 +1,3 @@
-
 const url = `https://raw.githubusercontent.com/alexsimkovich/patronage/main/api/data.json`;
 
 fetch(url)

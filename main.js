@@ -20,7 +20,7 @@ const renderPizzaList = (pizzaList) => {
             <img class = "pizza__img" src=${pizza.image}>
             <div class = "pizza__name">${pizza.title}</div>
             <div class = "pizza__price">${pizza.price.toFixed(2)} zł</div>
-            <div class = "pizza__ingredients">${pizza.ingredients}</div>
+            <div class = "pizza__ingredients">${pizza.ingredients.join(', ')}</div> 
             <div class = "pizza__button"><button class="btn__order" id=${pizza.id} data-name=${pizza.title} data-price=${pizza.price} data-id=${pizza.id}>Zamów</button></div> 
             `
             menuPizzaList.appendChild(item);

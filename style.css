@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+.header-basket {
+  background-color: cornflowerblue;
+  position: relative;
+}
+
+.basket {
+  position: fixed;
+  top: 25px;
+  right: 45px;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+}
+
+#basket-list {
+  text-align: left;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+ul {
+  list-style: none;
+}
+
+li.item__pizza {
+  border-bottom: 1px solid #000;
+}
+
+li.item__pizza:last-child {
+  border: none;
+}
+
+.menu-pizza h2 {
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+}
+
+.pizza__img {
+  width: 200px;
+  height: auto;
+  margin-top: 15px;
+}
+
+.pizza__name {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5rem;
+  padding-top: 10px;
+}
+
+.pizza__price {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.2rem;
+  text-align: right;
+  margin-right: 30px;
+}
+
+.pizza__ingredients {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.9rem;
+  padding: 25px;
+  text-align: center;
+}
+
+.pizza__button {
+  text-align: right;
+}
+
+.btn__order {
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  height: 35px;
+  padding: 0 35px;
+  margin-bottom: 10px;
+  border-width: 0;
+}
+
+#basket-btn {
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1em;
+  height: 50px;
+  padding: 0 25px;
+  border-width: 0;
+}
+
+.btn__delete {
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  height: 25px;
+  padding: 0 25px;
+  margin-bottom: 10px;
+  border-width: 0;
+}

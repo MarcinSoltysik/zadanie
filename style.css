@@ -1,101 +1,276 @@
+/* *********** */
+/* BASE STYLES */
+/* *********** */
+
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
-.header-basket {
-  background-color: cornflowerblue;
-  position: relative;
+*, *:before, *:after {
+  box-sizing: border-box;
 }
 
-.basket {
-  position: fixed;
-  top: 25px;
-  right: 45px;
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
   font-family: "Roboto", sans-serif;
+}
+
+h2 {
+  font-size: 24px;
+  text-transform: uppercase;
   text-align: center;
+  font-size: 700;
+  margin: 0;
+  padding: 20px 0 0;
+}
+
+/* *********** */
+/* NAVBAR */
+/* *********** */
+
+.navbar-menu {
+  position: fixed;
+  background-color: #333;
+  color: white;
+  width: 100%;
+  top: 0;
+}
+
+.navbar-logo {
+  font-size: 1.5rem;
+  margin: 0.5rem;
+  display: inline-block;
+}
+
+.navbar-toggle {
+  position: absolute;
+  top: 13px;
+  right: 13px;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+}
+
+.navbar-toggle .bar {
+  height: 3px;
+  width: 100%;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.navbar-options {
+  display: none;
+  margin: 0;
+  padding: 20px;
+}
+
+.navbar-options.active {
+  display: block;
+}
+
+.navbar-options .search {
+  width:100%;
+}
+
+.navbar-options .search input {
+  width: 100%;
+  font-size: 20px;
+}
+
+.navbar-options .sort {
+  width:100%;
+  padding: 20px 0 0;
+  text-align: center;
+}
+
+.navbar-options .sort button {
+  font-size: 16px;
+}
+
+/* *********** */
+/* BASKET */
+/* *********** */
+
+.basket {
+  width: 100%;
+  display: block;
+  margin-top: 30px;
+  padding: 20px;
+  border-bottom: 2px solid black;
 }
 
 #basket-list {
-  text-align: left;
-}
-
-.container {
-  display: flex;
-  justify-content: center;
-}
-
-ul {
+  margin: 0;
+  padding: 0;
   list-style: none;
 }
 
-li.item__pizza {
-  border-bottom: 1px solid #000;
+#basket-list li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 7px 0;
+  border-bottom: 1px dashed lightgray;
 }
 
-li.item__pizza:last-child {
+#basket-list li:last-child {
   border: none;
 }
 
-.menu-pizza h2 {
-  font-family: "Roboto", sans-serif;
+#basket-list li .item-id {
+  width: 10px;
+  color: rgb(165, 165, 165);
+}
+
+#basket-list div {
+  text-align: left;
+}
+
+#basket-list li .item-name {
+  min-width: 100px;
+  font-weight: 600;
+} 
+
+#basket-list li .item-price {
+  width: 60px;
+}
+
+#basket-list li .item-quantity{
+  width: 50px;
+}
+
+#basket-list li .item-sum{
+  width: 70px;
+}
+
+#basket-list li button{
+  cursor: pointer;
+  width: 50px;
+  padding: 5px 0;
+  background: rgba(171, 10, 10, 1);
+  border: 1px solid rgb(92, 0, 0);
+  color: #ffffff;
+  border: 0;
+}  
+
+#basket-buyall {
+  cursor: pointer;
+  margin: 15px 0 0;
+  padding: 10px;
+  width: 100%;
+  background: rgb(33, 114, 33);
+  color: #ffffff;
+  text-transform: uppercase;
+  border:1px solid rgb(21, 92, 21);
+  font-size: 16px;
+}
+
+/* *********** */
+/* PIZZA LIST */
+/* *********** */
+
+#pizza-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.pizza__item {
   text-align: center;
+  border-bottom: 1px dashed lightgray;
+  padding: 40px 0;
+}
+
+.pizza__item:last-child {
+  border: none;
 }
 
 .pizza__img {
-  width: 200px;
-  height: auto;
-  margin-top: 15px;
+  width: 100%;
+}
+
+.pizza__img img{
+  max-width: 100px;
 }
 
 .pizza__name {
-  font-family: "Roboto", sans-serif;
   font-size: 1.5rem;
-  padding-top: 10px;
+  padding: 5px 0;
 }
 
 .pizza__price {
-  font-family: "Roboto", sans-serif;
-  font-size: 1.2rem;
-  text-align: right;
-  margin-right: 30px;
+  font-weight: 600;
+  color:rgb(21, 92, 21);
 }
 
 .pizza__ingredients {
-  font-family: "Roboto", sans-serif;
-  font-size: 0.9rem;
   padding: 25px;
   text-align: center;
 }
 
-.pizza__button {
-  text-align: right;
+.pizza__button button {
+  cursor: pointer;
+  margin: 15px 0 0;
+  padding: 10px;
+  width: 100%;
+  background: rgb(33, 114, 33);
+  color: #ffffff;
+  text-transform: uppercase;
+  border:1px solid rgb(21, 92, 21);
+  font-size: 16px;
 }
 
-.btn__order {
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1em;
-  height: 35px;
-  padding: 0 35px;
-  margin-bottom: 10px;
-  border-width: 0;
-}
+/* *********** */
+/* MEDIA QUERIES */
+/* *********** */
 
-#basket-btn {
-  font-family: "Roboto", sans-serif;
-  font-size: 1em;
-  border-radius: 50px;
-  cursor: pointer;
-  font-size: 1em;
-  height: 50px;
-  padding: 0 25px;
-  border-width: 0;
-}
+@media (min-width: 1200px) {
+  .basket {
+    position: fixed;
+    width: 25%;
+    top: 75px;
+    right: 0;
+    text-align: center;
+    border: none;
+  }
 
-.btn__delete {
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1em;
-  height: 25px;
-  padding: 0 25px;
-  margin-bottom: 10px;
-  border-width: 0;
+  .basket h2 {
+    padding-bottom: 25px;
+  }
+
+  .menu-pizza {
+    width: 40%;
+    margin-left: 30%;
+  }
+
+  .navbar-menu {
+    position: initial;
+    display: block;
+    text-align: center;
+  }  
+
+  .navbar-toggle {
+    display: none;
+  }
+
+  .navbar-options {
+    display: block;
+    background: rgb(228, 228, 228);
+
+    padding: 10px 0 20px;
+    border-bottom: 1px solid rgb(184, 184, 184);
+  }
+
+  .navbar-options .search {
+    display: inline-block;
+    width: 49%;
+  }
+
+  .navbar-options .sort {
+    display: inline-block;
+    width: 50%;
+    text-align: right;
+  }
 }

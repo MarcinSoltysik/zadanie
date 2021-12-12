@@ -1,31 +1,54 @@
 <!DOCTYPE html>
 <html lang="pl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <title>Document</title>
-  </head>
-  <body>
-    <header class="header-basket">
-      <div class="basket">
-        <h2>zamówienie</h2>
-        <ul id="basket-list"></ul>
 
-        <button class="btn-buy-all" id="basket-btn" disabled>
-          Głodny? Zamów naszą pizzę
-        </button>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <title>zadanie #2</title>
+</head>
+
+<body>
+  <nav class="navbar-menu">
+    <div class="navbar-logo">Pizza App</div>
+    <a href="#" class="navbar-toggle">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </a>
+
+    <div class="navbar-options">
+      <div class="search">
+        <input placeholder="wpisz składnik" />
       </div>
-    </header>
 
-    <main class="container">
-      <div class="menu-pizza">
-        <h2>Pizza menu</h2>
-
-        <ul id="list-pizza"></ul>
+      <div class="sort">
+        <select id="sort">
+          <option value='a-z-down'>A-Z ▼</option>
+          <option value='a-z-up'>A-Z ▲</option>
+          <option value='price-down'>Cena ▼</option>
+          <option value='price-up'>Cena ▲</option>
+        </select>
+        <button id="btn-clear">wyczyść koszyk</button>
       </div>
-    </main>
-    <script src="main.js"></script>
-   </body>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="basket">
+      <h2>zamówienie</h2>
+      <ul id="basket-list"></ul>
+      <button id="basket-buyall" disabled>Głodny? Zamów naszą pizzę</button>
+    </div>
+
+    <div class="menu-pizza">
+      <h2>Pizza menu</h2>
+      <ul id="pizza-list"></ul>
+    </div>
+  </main>
+
+  <script src="main.js"></script>
+</body>
+
 </html>

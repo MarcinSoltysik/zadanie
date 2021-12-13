@@ -1,31 +1,43 @@
 "use strict";
 
 async function fetchData() {
-  const url = `https://raw.githubusercontent.com/alexsimkovich/patronage/main/api/data.json`;
+  const url =
+    "https://raw.githubusercontent.com/alexsimkovich/patronage/main/api/data.json";
 
   try {
     const response = await fetch(url);
-    const jsonResponse = await response.json();
-    return jsonResponse;
+    return response.json();
   } catch (error) {
     console.error("Upss, coś poszło nie tak :( ", error);
   }
 }
 
 function addSortingSuport() {
-  const sortowanieButtonNazwaAZ = document.querySelector("#nazwa-az");
-  const sortowanieButtonNazwaZA = document.querySelector("#nazwa-za");
-  const sortowanieButtonCenaUp = document.querySelector("#cena-up");
-  const sortowanieButtonCenaDown = document.querySelector("#cena-down");
+  const sortSelect = document.querySelector("#sort");
 
-  sortowanieButtonNazwaAZ.addEventListener("click", sortPoNazwieAZ);
-  sortowanieButtonNazwaZA.addEventListener("click", sortPoNazwieZA);
-  sortowanieButtonCenaDown.addEventListener("click", sortowanieCenaDown);
-  sortowanieButtonCenaUp.addEventListener("click", sortowanieCenaUp);
+  sortSelect.addEventListener("change", (e) => {
+    switch (e.target.value) {
+      case "a-z-down":
+        sortByNameAZ();
+        break;
+      case "a-z-up":
+        sortByNameZA();
+        break;
+      case "price-down":
+        sortPriceDown();
+        break;
+      case "price-up":
+        sortPriceUp();
+        break;
+      default:
+        sortByNameAZ();
+        break;
+    }
+  });
 }
 
 function appStart() {
-  sortPoNazwieAZ();
+  sortByNameAZ();
   renderPizzaList();
   addSortingSuport();
   addSerchSuport();
@@ -33,11 +45,11 @@ function appStart() {
 }
 
 function addToggleButtonSupport() {
-  const toggleButton = document.querySelector(".navbar-toggle")
-  const navbarBtn = document.querySelector(".navbar-options")
+  const toggleButton = document.querySelector(".navbar-toggle");
+  const navbarBtn = document.querySelector(".navbar-options");
 
-  toggleButton.addEventListener('click', () => {
-    navbarBtn.classList.toggle('active')
+  toggleButton.addEventListener("click", () => {
+    navbarBtn.classList.toggle("active");
   });
 }
 
@@ -50,7 +62,7 @@ function searchIngredients() {
   const searchInput = document.querySelector(".search input");
 
   const filteredProducts = pizzaList.filter((pizza) => {
-    const ingredientsString = pizza.ingredients.join("");
+    const ingredientsString = pizza.ingredients.join(",");
     const inputArray = searchInput.value.split(",");
     let condition = 1;
 
@@ -90,11 +102,11 @@ function renderPizzaList(list) {
             <div class = "pizza__name">${pizza.title}</div>
             <div class = "pizza__price">${pizza.price.toFixed(2)} zł</div>
             <div class = "pizza__ingredients">${pizza.ingredients.join(
-      ", "
-    )}</div> 
-            <div class = "pizza__button"><button class="btn__order" id=${pizza.id
-      } data-name=${pizza.title} data-price=${pizza.price
-      }  data-productid=${pizza.id}>Zamów</button></div> 
+              ", "
+            )}</div> 
+            <div class = "pizza__button"><button class="btn__order" data-id=${
+              pizza.id
+            }>Zamów</button></div> 
             `;
     menuPizzaList.appendChild(item);
   });
@@ -125,9 +137,7 @@ function creatBasketUi() {
 
   for (const oneProductInfo of basket.getBasketSummary()) {
     const newLi = document.createElement("li");
-    newLi.innerHTML = ` ${oneProductInfo.text} 
-          
-          <button class="btn__delete">Usuń</button> `;
+    newLi.innerHTML = ` ${oneProductInfo.text} <button class="btn__delete">Usuń</button> `;
 
     const deleteBtn = newLi.querySelector("button");
 
@@ -141,11 +151,10 @@ function creatBasketUi() {
 }
 
 function addProductToBasket(event) {
-  const name = event.target.dataset.name;
-  const price = Number(event.target.dataset.price);
-  const id = Number(event.target.dataset.productid);
+  const id = Number(event.target.dataset.id);
+  const pizza = pizzaList.find((pizza) => pizza.id === id);
 
-  const newProduct = new Product(name, price, id, 1);
+  const newProduct = new Product(pizza.title, pizza.price, pizza.id, 1);
   basket.add(newProduct);
 
   basket.getBasketSummary();
@@ -178,7 +187,7 @@ function clearBasketBtn() {
 
 /* FUNKCJE SORTOWANIA */
 
-function sortPoNazwieAZ() {
+function sortByNameAZ() {
   pizzaList.sort(function (a, b) {
     const nameA = a.title.toUpperCase();
     const nameB = b.title.toUpperCase();
@@ -194,7 +203,7 @@ function sortPoNazwieAZ() {
   renderFilteredPizzaList();
 }
 
-function sortPoNazwieZA() {
+function sortByNameZA() {
   pizzaList.sort(function (a, b) {
     const nameA = a.title.toUpperCase();
     const nameB = b.title.toUpperCase();
@@ -206,10 +215,11 @@ function sortPoNazwieZA() {
     }
     return 0;
   });
+
   renderFilteredPizzaList();
 }
 
-function sortowanieCenaDown() {
+function sortPriceDown() {
   pizzaList.sort(function (a, b) {
     return a.price - b.price;
   });
@@ -217,7 +227,7 @@ function sortowanieCenaDown() {
   renderFilteredPizzaList();
 }
 
-function sortowanieCenaUp() {
+function sortPriceUp() {
   pizzaList.sort(function (a, b) {
     return b.price - a.price;
   });
@@ -263,19 +273,21 @@ class Basket {
           <div class="item-name">${product.name}</div>
           <div class="item-price">${product.price.toFixed(2)} zł</div>
           <div class="item-quantity">${product.quantity} szt</div>
-          <div class="item-sum"> ${(product.price * product.quantity).toFixed(2)} zł</div>
+          <div class="item-sum"> ${(product.price * product.quantity).toFixed(
+            2
+          )} zł</div>
         `,
       };
     });
   }
 
   remove(id) {
-    const usuwanieIdKoszyk = this.items.find((el) => el.id === id);
+    const deleteIdBasket = this.items.find((el) => el.id === id);
 
-    if (usuwanieIdKoszyk.quantity > 1) {
-      usuwanieIdKoszyk.quantity--;
+    if (deleteIdBasket.quantity > 1) {
+      deleteIdBasket.quantity--;
     } else {
-      this.items = this.items.filter((el) => el.id !== usuwanieIdKoszyk.id);
+      this.items = this.items.filter((el) => el.id !== deleteIdBasket.id);
     }
     this.saveToLocalStorage();
   }
